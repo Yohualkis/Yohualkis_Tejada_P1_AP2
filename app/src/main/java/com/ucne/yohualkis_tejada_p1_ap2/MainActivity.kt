@@ -11,6 +11,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.rememberNavController
+import com.ucne.yohualkis_tejada_p1_ap2.presentation.navigation.GeneralNavHost
 import com.ucne.yohualkis_tejada_p1_ap2.ui.theme.Yohualkis_Tejada_P1_AP2Theme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -20,12 +22,14 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
+            val nav = rememberNavController()
             Yohualkis_Tejada_P1_AP2Theme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Greeting(
                         name = "Android",
                         modifier = Modifier.padding(innerPadding)
                     )
+                    GeneralNavHost(nav)
                 }
             }
         }
