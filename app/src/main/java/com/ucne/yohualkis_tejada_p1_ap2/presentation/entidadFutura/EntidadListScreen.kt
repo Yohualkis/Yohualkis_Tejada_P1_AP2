@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 
 @Composable
 fun EntidadListScreen(
-    viewModel: ViewModel = hiltViewModel(),
+    viewModel: EntidadViewModel = hiltViewModel(),
     goToEntidad: (Int?) -> Unit,
     goBack: () -> Unit
 ){
