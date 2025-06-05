@@ -24,30 +24,8 @@ class MainActivity : ComponentActivity() {
         setContent {
             val nav = rememberNavController()
             Yohualkis_Tejada_P1_AP2Theme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                    GeneralNavHost(nav)
-                }
+                GeneralNavHost(nav)
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    Yohualkis_Tejada_P1_AP2Theme {
-        Greeting("Android")
     }
 }
