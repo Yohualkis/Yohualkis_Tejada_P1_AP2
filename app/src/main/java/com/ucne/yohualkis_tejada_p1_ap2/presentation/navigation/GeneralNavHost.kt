@@ -5,8 +5,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
-import com.ucne.yohualkis_tejada_p1_ap2.presentation.entidadFutura.EntidadListScreen
-import com.ucne.yohualkis_tejada_p1_ap2.presentation.entidadFutura.EntidadScreen
+import com.ucne.yohualkis_tejada_p1_ap2.presentation.tarea.TareaListScreen
+import com.ucne.yohualkis_tejada_p1_ap2.presentation.tarea.TareaScreen
 
 
 @Composable
@@ -15,22 +15,21 @@ fun GeneralNavHost(
 ){
     NavHost(
         navController = navHostController,
-        startDestination = Screen.SistemaList
+        startDestination = Screen.TareasList
     ){
 
         // Lista de entidades
-        composable<Screen.SistemaList> {
-            EntidadListScreen(
-                goToEntidad = { navHostController.navigate(Screen.Sistema(it)) },
-                goBack = { navHostController.navigateUp() }
+        composable<Screen.TareasList> {
+            TareaListScreen(
+                goToTarea = { navHostController.navigate(Screen.Tarea(it)) },
             )
         }
 
         // Entidad formulario
-        composable<Screen.Sistema> { backStack ->
-            val args = backStack.toRoute<Screen.Sistema>()
-            EntidadScreen(
-                entidadId = args.sistemaId,
+        composable<Screen.Tarea> { backStack ->
+            val args = backStack.toRoute<Screen.Tarea>()
+            TareaScreen(
+                tareaId = args.tareaId,
                 goBack = { navHostController.navigateUp() }
             )
         }
