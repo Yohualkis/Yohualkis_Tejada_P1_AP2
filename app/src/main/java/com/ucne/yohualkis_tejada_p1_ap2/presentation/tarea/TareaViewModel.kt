@@ -47,7 +47,9 @@ class TareaViewModel @Inject constructor(
             uiStatePrivado.update {
                 it.copy(
                     errorMessageTiempo = "",
-                    errorMessageDescripcion = ""
+                    errorMessageDescripcion = "",
+                    tiempo = null,
+                    descripcion = ""
                 )
             }
         }
