@@ -53,7 +53,7 @@ fun TareaRow(
                         color = Color.Black
                     )
                     Text(
-                        text = "RD$${"%.2f".format(tarea.tiempo)}",
+                        text = "${tarea.tiempo} minutos",
                         fontSize = 14 .sp,
                         color = Color.DarkGray
                     )
@@ -88,7 +88,7 @@ fun TareaCardInfoPreview() {
         tarea = TareaEntity(
             tareaId = 1,
             descripcion = "Descripcion",
-            tiempo = 1
+            tiempo = 50
         ),
         onEditClick = {},
         onDeleteClick = {},
