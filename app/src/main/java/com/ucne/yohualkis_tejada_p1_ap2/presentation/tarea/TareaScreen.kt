@@ -1,5 +1,6 @@
 package com.ucne.yohualkis_tejada_p1_ap2.presentation.tarea
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
@@ -41,6 +42,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.ucne.yohualkis_tejada_p1_ap2.presentation.composables.MensajeDeErrorGenerico
 import com.ucne.yohualkis_tejada_p1_ap2.presentation.composables.TopBarGenerica
 import com.ucne.yohualkis_tejada_p1_ap2.presentation.navigation.UiEvent
 
@@ -50,14 +52,17 @@ fun TareaScreen(
     tareaId: Int?,
     goBack: () -> Unit,
 ) {
-    LaunchedEffect(tareaId) {
-        tareaId?.let {
-            viewModel.selectedTarea(tareaId)
-        }
+    LaunchedEffect(Unit) {
         viewModel.uiEvent.collect { event ->
             when (event) {
                 UiEvent.NavigateUp -> goBack()
             }
+        }
+    }
+
+    LaunchedEffect(tareaId) {
+        tareaId?.let {
+            viewModel.selectedTarea(tareaId)
         }
     }
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -120,7 +125,7 @@ fun TareaFormulario(
                     .fillMaxWidth()
                     .focusRequester(BuscadorFocus),
                 singleLine = true,
-                isError = uiState.descripcion.isNullOrBlank() && !uiState.errorMessageDescripcion.isNullOrBlank(),
+                isError = !uiState.errorMessageDescripcion.isNullOrBlank(),
                 leadingIcon = {
                     Icon(
                         imageVector = Icons.Default.Article,
@@ -128,20 +133,23 @@ fun TareaFormulario(
                     )
                 }
             )
-//            MensajeDeErrorGenerico(uiState.errorMessage)
+            MensajeDeErrorGenerico(uiState.errorMessageDescripcion)
 
             // CAMPO TIEMPO
             OutlinedTextField(
-                value = uiState.tiempo.toString(),
+                value = uiState.tiempo?.takeIf { it > 0 }?.toString() ?: "",
                 onValueChange = {
                     evento(TareaEvent.LimpiarErrorMessageTiempo)
-                    evento(TareaEvent.TiempoChange(it.toInt()))
+                    val tiempo = it.toIntOrNull()
+                    if(tiempo != null){
+                        evento(TareaEvent.TiempoChange(tiempo))
+                    }
                 },
                 label = { Text("Tiempo") },
                 modifier = Modifier.fillMaxWidth(),
                 singleLine = true,
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-                isError = (uiState.tiempo ?: 0) <= 0 && !uiState.errorMessageTiempo.isNullOrBlank(),
+                isError = !uiState.errorMessageTiempo.isNullOrBlank(),
                 leadingIcon = {
                     Icon(
                         imageVector = Icons.Default.AttachMoney,
@@ -149,8 +157,7 @@ fun TareaFormulario(
                     )
                 }
             )
-
-//            MensajeDeErrorGenerico(uiState.errorMessage)
+            MensajeDeErrorGenerico(uiState.errorMessageTiempo)
 
             Spacer(modifier = Modifier.height(8.dp))
 
