@@ -140,7 +140,7 @@ fun TareaFormulario(
                 label = { Text("Tiempo") },
                 modifier = Modifier.fillMaxWidth(),
                 singleLine = true,
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                 isError = (uiState.tiempo ?: 0) <= 0 && !uiState.errorMessageTiempo.isNullOrBlank(),
                 leadingIcon = {
                     Icon(
