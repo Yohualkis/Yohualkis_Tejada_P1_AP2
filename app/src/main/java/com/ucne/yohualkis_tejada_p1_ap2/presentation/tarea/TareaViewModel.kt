@@ -90,35 +90,37 @@ class TareaViewModel @Inject constructor(
 
     private fun save() {
         viewModelScope.launch {
-            limpiarTodosLosCampos()
-
+            limpiarErrorMessageTiempo()
+            limpiarErrorMessageDescripcion()
+            var hayErrores = false
             if (uiStatePrivado.value.descripcion.isNullOrBlank()) {
                 uiStatePrivado.update {
                     it.copy(errorMessageDescripcion = "Este campo es obligatorio *")
                 }
-                return@launch
+                hayErrores = true
             }
 
             if (uiStatePrivado.value.descripcion?.length!! > 50) {
                 uiStatePrivado.update {
                     it.copy(errorMessageDescripcion = "La descripción no puede tener más de 50 caracteres *")
                 }
-                return@launch
+                hayErrores = true
             }
 
-            if (uiStatePrivado.value.tiempo.toString().isBlank()) {
+            if (uiStatePrivado.value.tiempo == null) {
                 uiStatePrivado.update {
                     it.copy(errorMessageTiempo = "Este campo es obligatorio *")
                 }
-                return@launch
+                hayErrores = true
             }
 
-            if (uiStatePrivado.value.tiempo!! <= 0) {
+            if ((uiStatePrivado.value.tiempo ?: 0) <= 0) {
                 uiStatePrivado.update {
                     it.copy(errorMessageTiempo = "El tiempo debe ser mayor a 0 *")
                 }
-                return@launch
+                hayErrores = true
             }
+            if(hayErrores) return@launch
             repository.save(uiStatePrivado.value.toEntity())
             limpiarTodosLosCampos()
             _uiEvent.send(UiEvent.NavigateUp)
