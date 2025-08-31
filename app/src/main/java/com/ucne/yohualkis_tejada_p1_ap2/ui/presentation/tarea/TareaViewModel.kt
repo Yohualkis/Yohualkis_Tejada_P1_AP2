@@ -75,8 +75,6 @@ class TareaViewModel @Inject constructor(
 
     private fun save() {
         viewModelScope.launch {
-            var hayErrores = false
-
             val descripcion = uiStatePrivado.value.descripcion.orEmpty()
             val tiempo = uiStatePrivado.value.tiempo
 
@@ -106,9 +104,7 @@ class TareaViewModel @Inject constructor(
                 )
             }
 
-            hayErrores = errorDescripcion != null || errorTiempo != null
-
-            if (hayErrores) return@launch
+            if (errorDescripcion != null || errorTiempo != null) return@launch
 
             uiStatePrivado.update {
                 it.copy(guardado = true)
