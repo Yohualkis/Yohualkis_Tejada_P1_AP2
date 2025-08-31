@@ -133,9 +133,9 @@ class TareaViewModel @Inject constructor(
                 val tarea = repository.find(tareaId)
                 uiStatePrivado.update {
                     it.copy(
-                        tareaId = tarea?.tareaId,
-                        descripcion = tarea?.descripcion,
-                        tiempo = tarea?.tiempo,
+                        tareaId = tarea.tareaId,
+                        descripcion = tarea.descripcion,
+                        tiempo = tarea.tiempo,
                     )
                 }
             }
