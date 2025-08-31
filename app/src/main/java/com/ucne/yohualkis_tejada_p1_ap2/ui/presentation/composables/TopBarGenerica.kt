@@ -1,4 +1,4 @@
-package com.ucne.yohualkis_tejada_p1_ap2.presentation.composables
+package com.ucne.yohualkis_tejada_p1_ap2.ui.presentation.composables
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material.icons.Icons

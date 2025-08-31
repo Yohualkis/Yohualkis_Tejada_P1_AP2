@@ -1,4 +1,4 @@
-package com.ucne.yohualkis_tejada_p1_ap2.presentation.tarea
+package com.ucne.yohualkis_tejada_p1_ap2.ui.presentation.tarea
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

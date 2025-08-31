@@ -1,4 +1,4 @@
-package com.ucne.yohualkis_tejada_p1_ap2.presentation.navigation
+package com.ucne.yohualkis_tejada_p1_ap2.ui.presentation.navigation
 
 import kotlinx.serialization.Serializable
 

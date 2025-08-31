@@ -1,4 +1,4 @@
-package com.ucne.yohualkis_tejada_p1_ap2.presentation.composables
+package com.ucne.yohualkis_tejada_p1_ap2.ui.presentation.composables
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.padding

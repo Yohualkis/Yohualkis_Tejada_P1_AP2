@@ -1,10 +1,10 @@
-package com.ucne.yohualkis_tejada_p1_ap2.presentation.tarea
+package com.ucne.yohualkis_tejada_p1_ap2.ui.presentation.tarea
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ucne.yohualkis_tejada_p1_ap2.data.local.entities.TareaEntity
 import com.ucne.yohualkis_tejada_p1_ap2.data.repository.TareaRepository
-import com.ucne.yohualkis_tejada_p1_ap2.presentation.navigation.UiEvent
+import com.ucne.yohualkis_tejada_p1_ap2.ui.presentation.navigation.UiEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow

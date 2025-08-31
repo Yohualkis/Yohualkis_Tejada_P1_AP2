@@ -1,4 +1,4 @@
-package com.ucne.yohualkis_tejada_p1_ap2.presentation.tarea
+package com.ucne.yohualkis_tejada_p1_ap2.ui.presentation.tarea
 
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -19,7 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.ucne.yohualkis_tejada_p1_ap2.data.local.entities.TareaEntity
-import com.ucne.yohualkis_tejada_p1_ap2.presentation.composables.TopBarGenerica
+import com.ucne.yohualkis_tejada_p1_ap2.ui.presentation.composables.TopBarGenerica
 
 @Composable
 fun TareaListScreen(

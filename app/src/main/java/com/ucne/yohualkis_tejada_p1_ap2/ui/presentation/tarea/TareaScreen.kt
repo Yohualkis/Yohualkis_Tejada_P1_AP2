@@ -1,4 +1,4 @@
-package com.ucne.yohualkis_tejada_p1_ap2.presentation.tarea
+package com.ucne.yohualkis_tejada_p1_ap2.ui.presentation.tarea
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -40,9 +40,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.ucne.yohualkis_tejada_p1_ap2.presentation.composables.MensajeDeErrorGenerico
-import com.ucne.yohualkis_tejada_p1_ap2.presentation.composables.TopBarGenerica
-import com.ucne.yohualkis_tejada_p1_ap2.presentation.navigation.UiEvent
+import com.ucne.yohualkis_tejada_p1_ap2.ui.presentation.composables.MensajeDeErrorGenerico
+import com.ucne.yohualkis_tejada_p1_ap2.ui.presentation.composables.TopBarGenerica
+import com.ucne.yohualkis_tejada_p1_ap2.ui.presentation.navigation.UiEvent
 
 @Composable
 fun TareaScreen(

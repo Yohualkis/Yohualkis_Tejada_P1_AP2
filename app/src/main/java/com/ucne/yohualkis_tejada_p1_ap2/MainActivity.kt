@@ -11,7 +11,7 @@ import androidx.compose.material3.Scaffold
 
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
-import com.ucne.yohualkis_tejada_p1_ap2.presentation.navigation.GeneralNavHost
+import com.ucne.yohualkis_tejada_p1_ap2.ui.presentation.navigation.GeneralNavHost
 import com.ucne.yohualkis_tejada_p1_ap2.ui.theme.YohualkisTejadaP1AP2Theme
 import dagger.hilt.android.AndroidEntryPoint
 
