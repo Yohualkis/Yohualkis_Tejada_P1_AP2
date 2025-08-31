@@ -4,12 +4,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ucne.yohualkis_tejada_p1_ap2.data.local.entities.TareaEntity
 import com.ucne.yohualkis_tejada_p1_ap2.data.repository.TareaRepository
-import com.ucne.yohualkis_tejada_p1_ap2.ui.presentation.navigation.UiEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -21,9 +18,6 @@ class TareaViewModel @Inject constructor(
     private val uiStatePrivado = MutableStateFlow(TareaUiState())
     val uiState = uiStatePrivado.asStateFlow()
 
-    private val _uiEvent = Channel<UiEvent>()
-    val uiEvent = _uiEvent.receiveAsFlow()
-
     init {
         getTareas()
     }
@@ -33,12 +27,21 @@ class TareaViewModel @Inject constructor(
             is TareaEvent.TareaChange -> onTareaChange(event.tareaId)
             is TareaEvent.DescripcionChange -> onDecripcionChange(event.descripcion)
             is TareaEvent.TiempoChange -> onTiempoChange(event.tiempo)
+            TareaEvent.GoBackAfterSave -> onGoBackAfterSave()
 
             is TareaEvent.Delete -> delete(event.tarea)
             TareaEvent.Save -> save()
             TareaEvent.LimpiarTodo -> limpiarTodosLosCampos()
             TareaEvent.LimpiarErrorMessageTiempo -> limpiarErrorMessageTiempo()
             TareaEvent.LimpiarErrorMessageDescripcion -> limpiarErrorMessageDescripcion()
+        }
+    }
+
+    private fun onGoBackAfterSave() {
+        viewModelScope.launch {
+            uiStatePrivado.update {
+                it.copy(guardado = false)
+            }
         }
     }
 
@@ -121,9 +124,13 @@ class TareaViewModel @Inject constructor(
                 hayErrores = true
             }
             if (hayErrores) return@launch
+
+            uiStatePrivado.update {
+                it.copy(guardado = true)
+            }
+
             repository.save(uiStatePrivado.value.toEntity())
             limpiarTodosLosCampos()
-            _uiEvent.send(UiEvent.NavigateUp)
         }
     }
 
