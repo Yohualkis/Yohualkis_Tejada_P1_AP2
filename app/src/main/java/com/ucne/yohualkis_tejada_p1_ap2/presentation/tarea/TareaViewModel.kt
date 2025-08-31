@@ -42,7 +42,7 @@ class TareaViewModel @Inject constructor(
         }
     }
 
-    private fun limpiarTodosLosCampos(){
+    private fun limpiarTodosLosCampos() {
         viewModelScope.launch {
             uiStatePrivado.update {
                 it.copy(
@@ -120,7 +120,7 @@ class TareaViewModel @Inject constructor(
                 }
                 hayErrores = true
             }
-            if(hayErrores) return@launch
+            if (hayErrores) return@launch
             repository.save(uiStatePrivado.value.toEntity())
             limpiarTodosLosCampos()
             _uiEvent.send(UiEvent.NavigateUp)
@@ -152,7 +152,10 @@ class TareaViewModel @Inject constructor(
     private fun onTiempoChange(tiempo: Int) {
         viewModelScope.launch {
             uiStatePrivado.update {
-                it.copy(tiempo = tiempo)
+                it.copy(
+                    tiempo = tiempo,
+                    errorMessageTiempo = ""
+                )
             }
         }
     }
@@ -160,7 +163,10 @@ class TareaViewModel @Inject constructor(
     private fun onDecripcionChange(descripcion: String) {
         viewModelScope.launch {
             uiStatePrivado.update {
-                it.copy(descripcion = descripcion)
+                it.copy(
+                    descripcion = descripcion,
+                    errorMessageTiempo = ""
+                )
             }
         }
     }
