@@ -1,6 +1,5 @@
 package com.ucne.yohualkis_tejada_p1_ap2.presentation.tarea
 
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
@@ -15,13 +14,12 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Article
+import androidx.compose.material.icons.automirrored.filled.Article
 import androidx.compose.material.icons.filled.AttachMoney
 import androidx.compose.material.icons.filled.CleaningServices
 import androidx.compose.material.icons.filled.Save
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
@@ -73,15 +71,14 @@ fun TareaScreen(
     )
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TareaFormulario(
     uiState: TareaUiState,
     evento: (TareaEvent) -> Unit,
     goBack: () -> Unit,
 ) {
-    val BuscadorFocus = remember { FocusRequester() }
-    val ManejadorFocus = LocalFocusManager.current
+    val buscadorFocus = remember { FocusRequester() }
+    val manejadorFocus = LocalFocusManager.current
 
     Scaffold(
         topBar = {
@@ -101,7 +98,7 @@ fun TareaFormulario(
                     indication = null,
                     interactionSource = remember { MutableInteractionSource() }
                 ) {
-                    ManejadorFocus.clearFocus()
+                    manejadorFocus.clearFocus()
                 },
         ) {
             Text(
@@ -123,12 +120,12 @@ fun TareaFormulario(
                 label = { Text("Descripción") },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .focusRequester(BuscadorFocus),
+                    .focusRequester(buscadorFocus),
                 singleLine = true,
                 isError = !uiState.errorMessageDescripcion.isNullOrBlank(),
                 leadingIcon = {
                     Icon(
-                        imageVector = Icons.Default.Article,
+                        imageVector = Icons.AutoMirrored.Filled.Article,
                         contentDescription = ""
                     )
                 }
@@ -140,10 +137,7 @@ fun TareaFormulario(
                 value = uiState.tiempo?.takeIf { it > 0 }?.toString() ?: "",
                 onValueChange = {
                     evento(TareaEvent.LimpiarErrorMessageTiempo)
-                    val tiempo = it.toIntOrNull()
-                    if(tiempo != null){
-                        evento(TareaEvent.TiempoChange(tiempo))
-                    }
+                    evento(TareaEvent.TiempoChange(it.toInt()))
                 },
                 label = { Text("Tiempo") },
                 modifier = Modifier.fillMaxWidth(),
@@ -170,7 +164,7 @@ fun TareaFormulario(
                     Button(
                         onClick = {
                             evento(TareaEvent.LimpiarTodo)
-                            ManejadorFocus.clearFocus()
+                            manejadorFocus.clearFocus()
                         },
                         modifier = Modifier.padding(4.dp),
                         shape = RoundedCornerShape(12.dp),
@@ -196,7 +190,7 @@ fun TareaFormulario(
                     Button(
                         onClick = {
                             evento(TareaEvent.Save)
-                            ManejadorFocus.clearFocus()
+                            manejadorFocus.clearFocus()
                         },
                         modifier = Modifier.padding(4.dp),
                         shape = RoundedCornerShape(12.dp)
