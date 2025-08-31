@@ -114,7 +114,6 @@ fun TareaFormulario(
             OutlinedTextField(
                 value = uiState.descripcion ?: "",
                 onValueChange = {
-                    evento(TareaEvent.LimpiarErrorMessageDescripcion)
                     evento(TareaEvent.DescripcionChange(it))
                 },
                 label = { Text("Descripción") },
@@ -136,7 +135,6 @@ fun TareaFormulario(
             OutlinedTextField(
                 value = uiState.tiempo?.takeIf { it > 0 }?.toString() ?: "",
                 onValueChange = {
-                    evento(TareaEvent.LimpiarErrorMessageTiempo)
                     evento(TareaEvent.TiempoChange(it.toInt()))
                 },
                 label = { Text("Tiempo") },
