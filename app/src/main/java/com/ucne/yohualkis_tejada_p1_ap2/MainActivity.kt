@@ -11,8 +11,8 @@ import androidx.compose.material3.Scaffold
 
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
-import com.ucne.yohualkis_tejada_p1_ap2.presentation.navigation.GeneralNavHost
-import com.ucne.yohualkis_tejada_p1_ap2.ui.theme.Yohualkis_Tejada_P1_AP2Theme
+import com.ucne.yohualkis_tejada_p1_ap2.ui.presentation.navigation.GeneralNavHost
+import com.ucne.yohualkis_tejada_p1_ap2.ui.theme.YohualkisTejadaP1AP2Theme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -24,7 +24,7 @@ class MainActivity : ComponentActivity() {
             val nav = rememberNavController()
             Scaffold (Modifier.fillMaxSize()){
                 Box(Modifier.fillMaxSize().padding(it)){
-                    Yohualkis_Tejada_P1_AP2Theme {
+                    YohualkisTejadaP1AP2Theme {
                         GeneralNavHost(nav)
                     }
                 }

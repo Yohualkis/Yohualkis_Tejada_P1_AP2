@@ -1,10 +1,10 @@
-package com.ucne.yohualkis_tejada_p1_ap2.presentation.tarea
+package com.ucne.yohualkis_tejada_p1_ap2.ui.presentation.tarea
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ucne.yohualkis_tejada_p1_ap2.data.local.entities.TareaEntity
 import com.ucne.yohualkis_tejada_p1_ap2.data.repository.TareaRepository
-import com.ucne.yohualkis_tejada_p1_ap2.presentation.navigation.UiEvent
+import com.ucne.yohualkis_tejada_p1_ap2.ui.presentation.navigation.UiEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -42,7 +42,7 @@ class TareaViewModel @Inject constructor(
         }
     }
 
-    private fun limpiarTodosLosCampos(){
+    private fun limpiarTodosLosCampos() {
         viewModelScope.launch {
             uiStatePrivado.update {
                 it.copy(
@@ -120,7 +120,7 @@ class TareaViewModel @Inject constructor(
                 }
                 hayErrores = true
             }
-            if(hayErrores) return@launch
+            if (hayErrores) return@launch
             repository.save(uiStatePrivado.value.toEntity())
             limpiarTodosLosCampos()
             _uiEvent.send(UiEvent.NavigateUp)
@@ -133,9 +133,9 @@ class TareaViewModel @Inject constructor(
                 val tarea = repository.find(tareaId)
                 uiStatePrivado.update {
                     it.copy(
-                        tareaId = tarea?.tareaId,
-                        descripcion = tarea?.descripcion,
-                        tiempo = tarea?.tiempo,
+                        tareaId = tarea.tareaId,
+                        descripcion = tarea.descripcion,
+                        tiempo = tarea.tiempo,
                     )
                 }
             }
@@ -152,7 +152,10 @@ class TareaViewModel @Inject constructor(
     private fun onTiempoChange(tiempo: Int) {
         viewModelScope.launch {
             uiStatePrivado.update {
-                it.copy(tiempo = tiempo)
+                it.copy(
+                    tiempo = tiempo,
+                    errorMessageTiempo = ""
+                )
             }
         }
     }
@@ -160,7 +163,10 @@ class TareaViewModel @Inject constructor(
     private fun onDecripcionChange(descripcion: String) {
         viewModelScope.launch {
             uiStatePrivado.update {
-                it.copy(descripcion = descripcion)
+                it.copy(
+                    descripcion = descripcion,
+                    errorMessageTiempo = ""
+                )
             }
         }
     }

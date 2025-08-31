@@ -1,4 +1,4 @@
-package com.ucne.yohualkis_tejada_p1_ap2.presentation.tarea
+package com.ucne.yohualkis_tejada_p1_ap2.ui.presentation.tarea
 
 import com.ucne.yohualkis_tejada_p1_ap2.data.local.entities.TareaEntity
 

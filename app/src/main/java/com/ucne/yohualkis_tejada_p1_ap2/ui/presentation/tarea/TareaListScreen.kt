@@ -1,6 +1,5 @@
-package com.ucne.yohualkis_tejada_p1_ap2.presentation.tarea
+package com.ucne.yohualkis_tejada_p1_ap2.ui.presentation.tarea
 
-import com.ucne.yohualkis_tejada_p1_ap2.data.local.entities.TareaEntity
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -9,7 +8,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
@@ -20,7 +18,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.ucne.yohualkis_tejada_p1_ap2.presentation.composables.TopBarGenerica
+import com.ucne.yohualkis_tejada_p1_ap2.data.local.entities.TareaEntity
+import com.ucne.yohualkis_tejada_p1_ap2.ui.presentation.composables.TopBarGenerica
 
 @Composable
 fun TareaListScreen(
@@ -31,18 +30,15 @@ fun TareaListScreen(
     DesplegarListado(
         uiState = uiState,
         goToTarea = { goToTarea(it) },
-        evento = { viewModel::onEvent },
         onDeleteClick = { viewModel.onEvent(TareaEvent.Delete(it)) },
     )
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DesplegarListado(
     uiState: TareaUiState,
     goToTarea: (Int?) -> Unit,
     onDeleteClick: (TareaEntity) -> Unit,
-    evento: (TareaEvent) -> Unit
 ) {
     Scaffold(
         floatingActionButton = {
@@ -99,7 +95,6 @@ fun PreviewListado() {
             )
         ),
         onDeleteClick = {},
-        evento = {},
         goToTarea = {},
     )
 }

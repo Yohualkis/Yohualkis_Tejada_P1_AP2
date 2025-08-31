@@ -1,12 +1,12 @@
-package com.ucne.yohualkis_tejada_p1_ap2.presentation.navigation
+package com.ucne.yohualkis_tejada_p1_ap2.ui.presentation.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
-import com.ucne.yohualkis_tejada_p1_ap2.presentation.tarea.TareaListScreen
-import com.ucne.yohualkis_tejada_p1_ap2.presentation.tarea.TareaScreen
+import com.ucne.yohualkis_tejada_p1_ap2.ui.presentation.tarea.TareaListScreen
+import com.ucne.yohualkis_tejada_p1_ap2.ui.presentation.tarea.TareaScreen
 
 
 @Composable
