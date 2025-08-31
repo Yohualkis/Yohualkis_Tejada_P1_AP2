@@ -17,10 +17,10 @@ object AppModule{
     @Singleton
     fun database(@ApplicationContext contexto: Context) =
         Room.databaseBuilder(
-            context = contexto,
-            klass = Parcial1Db::class.java,
-            name = "Parcial1.db"
-        ).fallbackToDestructiveMigration().build()
+                context = contexto,
+                klass = Parcial1Db::class.java,
+                name = "Parcial1.db"
+            ).fallbackToDestructiveMigration(false).build()
 
     @Provides
     fun provideTareaDao(parcial1Db: Parcial1Db) = parcial1Db.TareaDao()
