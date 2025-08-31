@@ -8,5 +8,6 @@ data class TareaUiState(
     val tiempo: Int? = null,
     val errorMessageDescripcion: String? = "",
     val errorMessageTiempo: String? = "",
-    val listaTareas: List<TareaEntity> = emptyList<TareaEntity>()
+    val guardado: Boolean = false,
+    val listaTareas: List<TareaEntity> = emptyList()
 )
