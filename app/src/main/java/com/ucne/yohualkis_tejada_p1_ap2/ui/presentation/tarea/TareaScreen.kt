@@ -42,7 +42,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.ucne.yohualkis_tejada_p1_ap2.ui.presentation.composables.MensajeDeErrorGenerico
 import com.ucne.yohualkis_tejada_p1_ap2.ui.presentation.composables.TopBarGenerica
-import com.ucne.yohualkis_tejada_p1_ap2.ui.presentation.navigation.UiEvent
 
 @Composable
 fun TareaScreen(
@@ -50,14 +49,6 @@ fun TareaScreen(
     tareaId: Int?,
     goBack: () -> Unit,
 ) {
-    LaunchedEffect(Unit) {
-        viewModel.uiEvent.collect { event ->
-            when (event) {
-                UiEvent.NavigateUp -> goBack()
-            }
-        }
-    }
-
     LaunchedEffect(tareaId) {
         tareaId?.let {
             viewModel.selectedTarea(tareaId)
@@ -69,6 +60,12 @@ fun TareaScreen(
         evento = viewModel::onEvent,
         goBack = goBack
     )
+    LaunchedEffect(uiState.guardado) {
+        if (uiState.guardado) {
+            goBack()
+            viewModel.onEvent(TareaEvent.GoBackAfterSave)
+        }
+    }
 }
 
 @Composable
