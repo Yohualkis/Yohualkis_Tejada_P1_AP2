@@ -32,8 +32,6 @@ class TareaViewModel @Inject constructor(
             is TareaEvent.Delete -> delete(event.tarea)
             TareaEvent.Save -> save()
             TareaEvent.LimpiarTodo -> limpiarTodosLosCampos()
-            TareaEvent.LimpiarErrorMessageTiempo -> limpiarErrorMessageTiempo()
-            TareaEvent.LimpiarErrorMessageDescripcion -> limpiarErrorMessageDescripcion()
         }
     }
 
@@ -58,22 +56,6 @@ class TareaViewModel @Inject constructor(
         }
     }
 
-    private fun limpiarErrorMessageTiempo() {
-        viewModelScope.launch {
-            uiStatePrivado.update {
-                it.copy(errorMessageTiempo = "")
-            }
-        }
-    }
-
-    private fun limpiarErrorMessageDescripcion() {
-        viewModelScope.launch {
-            uiStatePrivado.update {
-                it.copy(errorMessageDescripcion = "")
-            }
-        }
-    }
-
     private fun getTareas() {
         viewModelScope.launch {
             repository.getAll().collect { lista ->
@@ -93,36 +75,39 @@ class TareaViewModel @Inject constructor(
 
     private fun save() {
         viewModelScope.launch {
-            limpiarErrorMessageTiempo()
-            limpiarErrorMessageDescripcion()
             var hayErrores = false
-            if (uiStatePrivado.value.descripcion.isNullOrBlank()) {
-                uiStatePrivado.update {
-                    it.copy(errorMessageDescripcion = "Este campo es obligatorio *")
-                }
-                hayErrores = true
+
+            val descripcion = uiStatePrivado.value.descripcion.orEmpty()
+            val tiempo = uiStatePrivado.value.tiempo
+
+            var errorDescripcion: String? = null
+            var errorTiempo: String? = null
+
+            when {
+                descripcion.isBlank() ->
+                    errorDescripcion = "Este campo es obligatorio *"
+
+                descripcion.length > 50 ->
+                    errorDescripcion = "La descripción no puede tener más de 50 caracteres *"
             }
 
-            if (uiStatePrivado.value.descripcion?.length!! > 50) {
-                uiStatePrivado.update {
-                    it.copy(errorMessageDescripcion = "La descripción no puede tener más de 50 caracteres *")
-                }
-                hayErrores = true
+            when {
+                tiempo == null ->
+                    errorTiempo = "Este campo es obligatorio *"
+
+                tiempo <= 0 ->
+                    errorTiempo = "El tiempo debe ser mayor a 0 *"
             }
 
-            if (uiStatePrivado.value.tiempo == null) {
-                uiStatePrivado.update {
-                    it.copy(errorMessageTiempo = "Este campo es obligatorio *")
-                }
-                hayErrores = true
+            uiStatePrivado.update {
+                it.copy(
+                    errorMessageDescripcion = errorDescripcion,
+                    errorMessageTiempo = errorTiempo
+                )
             }
 
-            if ((uiStatePrivado.value.tiempo ?: 0) <= 0) {
-                uiStatePrivado.update {
-                    it.copy(errorMessageTiempo = "El tiempo debe ser mayor a 0 *")
-                }
-                hayErrores = true
-            }
+            hayErrores = errorDescripcion != null || errorTiempo != null
+
             if (hayErrores) return@launch
 
             uiStatePrivado.update {
@@ -172,7 +157,7 @@ class TareaViewModel @Inject constructor(
             uiStatePrivado.update {
                 it.copy(
                     descripcion = descripcion,
-                    errorMessageTiempo = ""
+                    errorMessageDescripcion = ""
                 )
             }
         }
