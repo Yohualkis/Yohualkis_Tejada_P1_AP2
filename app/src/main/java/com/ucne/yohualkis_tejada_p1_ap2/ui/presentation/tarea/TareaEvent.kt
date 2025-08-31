@@ -11,6 +11,4 @@ sealed interface TareaEvent {
     data class Delete(val tarea: TareaEntity): TareaEvent
     data object Save: TareaEvent
     data object LimpiarTodo: TareaEvent
-    data object LimpiarErrorMessageDescripcion: TareaEvent
-    data object LimpiarErrorMessageTiempo: TareaEvent
 }
