@@ -18,6 +18,14 @@ class TareaViewModel @Inject constructor(
     private val uiStatePrivado = MutableStateFlow(TareaUiState())
     val uiState = uiStatePrivado.asStateFlow()
 
+    companion object {
+        private const val REQUIRED_FIELD = "Este campo es obligatorio *"
+        private const val MIN_TIEMPO_NUMBER = 0
+        private const val MIN_TIEMPO = "El tiempo debe ser mayor a 0 *"
+        private const val MAX_DESCRIPCION_LENGTH = 25
+        private const val MAX_DESCRIPCION = "La descripción no puede tener más de $MAX_DESCRIPCION_LENGTH caracteres *"
+    }
+
     init {
         getTareas()
     }
@@ -83,18 +91,18 @@ class TareaViewModel @Inject constructor(
 
             when {
                 descripcion.isBlank() ->
-                    errorDescripcion = "Este campo es obligatorio *"
+                    errorDescripcion = REQUIRED_FIELD
 
-                descripcion.length > 50 ->
-                    errorDescripcion = "La descripción no puede tener más de 50 caracteres *"
+                descripcion.length > MAX_DESCRIPCION_LENGTH ->
+                    errorDescripcion = MAX_DESCRIPCION
             }
 
             when {
                 tiempo == null ->
-                    errorTiempo = "Este campo es obligatorio *"
+                    errorTiempo = REQUIRED_FIELD
 
-                tiempo <= 0 ->
-                    errorTiempo = "El tiempo debe ser mayor a 0 *"
+                tiempo <= MIN_TIEMPO_NUMBER ->
+                    errorTiempo = MIN_TIEMPO
             }
 
             uiStatePrivado.update {
@@ -137,7 +145,7 @@ class TareaViewModel @Inject constructor(
         }
     }
 
-    private fun onTiempoChange(tiempo: Int) {
+    private fun onTiempoChange(tiempo: Int?) {
         viewModelScope.launch {
             uiStatePrivado.update {
                 it.copy(

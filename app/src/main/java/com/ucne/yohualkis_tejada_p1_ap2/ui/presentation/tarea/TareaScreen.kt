@@ -130,9 +130,9 @@ fun TareaFormulario(
 
             // CAMPO TIEMPO
             OutlinedTextField(
-                value = uiState.tiempo?.takeIf { it > 0 }?.toString() ?: "",
+                value = uiState.tiempo?.toString() ?: "",
                 onValueChange = {
-                    evento(TareaEvent.TiempoChange(it.toInt()))
+                    evento(TareaEvent.TiempoChange(it.toIntOrNull()))
                 },
                 label = { Text("Tiempo") },
                 modifier = Modifier.fillMaxWidth(),
