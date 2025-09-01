@@ -53,7 +53,8 @@ fun DesplegarListado(
         topBar = {
             TopBarGenerica(
                 goBack = {},
-                titulo = "Listado de Tareas"
+                titulo = "Listado de Tareas",
+                backButtonVisible = false
             )
         }
     ) { innerPadding ->
