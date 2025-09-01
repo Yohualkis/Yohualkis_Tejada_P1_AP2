@@ -21,10 +21,10 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            val nav = rememberNavController()
-            Scaffold (Modifier.fillMaxSize()){
-                Box(Modifier.fillMaxSize().padding(it)){
-                    YohualkisTejadaP1AP2Theme {
+            YohualkisTejadaP1AP2Theme {
+                val nav = rememberNavController()
+                Scaffold { paddingValues ->
+                    Box(Modifier.fillMaxSize().padding(paddingValues)) {
                         GeneralNavHost(nav)
                     }
                 }
