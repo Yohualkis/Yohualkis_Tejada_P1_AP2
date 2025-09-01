@@ -63,9 +63,8 @@ fun DesplegarListado(
 
         LazyColumn(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(8.dp)
-                .padding(innerPadding)
+                .fillMaxWidth(),
+            contentPadding = innerPadding
         ) {
             items(uiState.listaTareas){ tarea ->
                 TareaRow(
