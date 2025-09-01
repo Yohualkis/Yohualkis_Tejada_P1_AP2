@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -15,7 +16,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.Article
-import androidx.compose.material.icons.filled.AttachMoney
+import androidx.compose.material.icons.filled.AccessTimeFilled
 import androidx.compose.material.icons.filled.CleaningServices
 import androidx.compose.material.icons.filled.Save
 import androidx.compose.material3.Button
@@ -87,11 +88,11 @@ fun TareaFormulario(
             )
         },
     ) { padding ->
-        Spacer(Modifier.height(128.dp))
         Column(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(15.dp)
+                .fillMaxSize()
+                .padding(horizontal = 15.dp)
+                .padding(top = 50.dp)
                 .padding(padding)
                 .clickable(
                     indication = null,
@@ -143,7 +144,7 @@ fun TareaFormulario(
                 isError = !uiState.errorMessageTiempo.isNullOrBlank(),
                 leadingIcon = {
                     Icon(
-                        imageVector = Icons.Default.AttachMoney,
+                        imageVector = Icons.Default.AccessTimeFilled,
                         contentDescription = ""
                     )
                 }

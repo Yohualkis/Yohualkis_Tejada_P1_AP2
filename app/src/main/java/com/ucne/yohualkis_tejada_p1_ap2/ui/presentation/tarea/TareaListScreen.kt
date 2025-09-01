@@ -3,7 +3,6 @@ package com.ucne.yohualkis_tejada_p1_ap2.ui.presentation.tarea
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
@@ -63,9 +62,8 @@ fun DesplegarListado(
 
         LazyColumn(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(8.dp)
-                .padding(innerPadding)
+                .fillMaxWidth(),
+            contentPadding = innerPadding
         ) {
             items(uiState.listaTareas){ tarea ->
                 TareaRow(
