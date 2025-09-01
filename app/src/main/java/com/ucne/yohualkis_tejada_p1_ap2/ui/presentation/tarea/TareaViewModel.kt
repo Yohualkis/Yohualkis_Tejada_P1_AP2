@@ -24,6 +24,7 @@ class TareaViewModel @Inject constructor(
         private const val MIN_TIEMPO = "El tiempo debe ser mayor a 0 *"
         private const val MAX_DESCRIPCION_LENGTH = 25
         private const val MAX_DESCRIPCION = "La descripción no puede tener más de $MAX_DESCRIPCION_LENGTH caracteres *"
+        private const val DESCRIPCION_EXISTENTE = "Ya existe una tarea con esta descripción *"
     }
 
     init {
@@ -95,6 +96,11 @@ class TareaViewModel @Inject constructor(
 
                 descripcion.length > MAX_DESCRIPCION_LENGTH ->
                     errorDescripcion = MAX_DESCRIPCION
+
+                uiStatePrivado.value.listaTareas.any {
+                    it.descripcion.equals(descripcion, ignoreCase = true) &&
+                            it.tareaId != uiStatePrivado.value.tareaId
+                } -> errorDescripcion = DESCRIPCION_EXISTENTE
             }
 
             when {
