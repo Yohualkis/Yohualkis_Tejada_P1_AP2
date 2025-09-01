@@ -1,6 +1,6 @@
 package com.ucne.yohualkis_tejada_p1_ap2.ui.presentation.tarea
 
-import androidx.compose.foundation.layout.Arrangement
+ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -12,14 +12,16 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.ucne.yohualkis_tejada_p1_ap2.R
 import com.ucne.yohualkis_tejada_p1_ap2.data.local.entities.TareaEntity
 
 @Composable
@@ -32,7 +34,7 @@ fun TareaRow(
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 2.dp),
-        colors = CardDefaults.outlinedCardColors(containerColor = Color.White),
+        colors = CardDefaults.outlinedCardColors(containerColor = MaterialTheme.colorScheme.surfaceDim),
         border = CardDefaults.outlinedCardBorder()
     ) {
         Column {
@@ -50,12 +52,12 @@ fun TareaRow(
                     Text(
                         text = tarea.descripcion,
                         fontSize = 18.sp,
-                        color = Color.Black
+                        color = MaterialTheme.colorScheme.onSurface
                     )
                     Text(
-                        text = "${tarea.tiempo} minutos",
+                        text = "${tarea.tiempo} ${stringResource(R.string.label_minutos)}",
                         fontSize = 14 .sp,
-                        color = Color.DarkGray
+                        color = MaterialTheme.colorScheme.outline
                     )
                 }
 
@@ -64,15 +66,15 @@ fun TareaRow(
                     IconButton(onClick = { onEditClick(tarea.tareaId) }) {
                         Icon(
                             imageVector = Icons.Default.Edit,
-                            contentDescription = "",
-                            tint = Color.Gray
+                            contentDescription = stringResource(R.string.icono_edit_tarea),
+                            tint = MaterialTheme.colorScheme.secondary
                         )
                     }
                     IconButton(onClick = { onDeleteClick() }) {
                         Icon(
                             imageVector = Icons.Default.Delete,
-                            contentDescription = "",
-                            tint = Color.Red
+                            contentDescription = stringResource(R.string.icono_delete_tarea),
+                            tint = MaterialTheme.colorScheme.tertiary
                         )
                     }
                 }
