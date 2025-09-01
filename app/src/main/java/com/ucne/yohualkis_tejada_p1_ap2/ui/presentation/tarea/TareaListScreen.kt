@@ -14,10 +14,12 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.ucne.yohualkis_tejada_p1_ap2.R
 import com.ucne.yohualkis_tejada_p1_ap2.data.local.entities.TareaEntity
 import com.ucne.yohualkis_tejada_p1_ap2.ui.presentation.composables.TopBarGenerica
 
@@ -47,13 +49,13 @@ fun DesplegarListado(
                     goToTarea(0)
                 }
             ) {
-                Icon(Icons.Filled.Add, "")
+                Icon(Icons.Filled.Add, stringResource(R.string.agregar_tarea))
             }
         },
         topBar = {
             TopBarGenerica(
                 goBack = {},
-                titulo = "Listado de Tareas",
+                titulo = stringResource(R.string.titulo_listado),
                 backButtonVisible = false
             )
         }

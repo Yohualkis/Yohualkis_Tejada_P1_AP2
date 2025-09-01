@@ -34,12 +34,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.ucne.yohualkis_tejada_p1_ap2.R
 import com.ucne.yohualkis_tejada_p1_ap2.ui.presentation.composables.MensajeDeErrorGenerico
 import com.ucne.yohualkis_tejada_p1_ap2.ui.presentation.composables.TopBarGenerica
 
@@ -80,7 +82,7 @@ fun TareaFormulario(
     Scaffold(
         topBar = {
             TopBarGenerica(
-                titulo = "Atrás",
+                titulo = stringResource(R.string.atras),
                 goBack = goBack
             )
         },
@@ -99,7 +101,7 @@ fun TareaFormulario(
                 },
         ) {
             Text(
-                text = if (uiState.tareaId != null && uiState.tareaId != 0) "Editar tarea" else "Registrar tarea",
+                text = if (uiState.tareaId != null && uiState.tareaId != 0) stringResource(R.string.editar_tarea) else stringResource(R.string.registrar_tarea),
                 fontSize = 24.sp,
                 modifier = Modifier.align(Alignment.CenterHorizontally),
                 fontWeight = FontWeight.Bold,
@@ -113,7 +115,7 @@ fun TareaFormulario(
                 onValueChange = {
                     evento(TareaEvent.DescripcionChange(it))
                 },
-                label = { Text("Descripción") },
+                label = { Text(stringResource(R.string.campo_descripcion)) },
                 modifier = Modifier
                     .fillMaxWidth()
                     .focusRequester(buscadorFocus),
@@ -134,7 +136,7 @@ fun TareaFormulario(
                 onValueChange = {
                     evento(TareaEvent.TiempoChange(it.toIntOrNull()))
                 },
-                label = { Text("Tiempo") },
+                label = { Text(stringResource(R.string.campo_tiempo)) },
                 modifier = Modifier.fillMaxWidth(),
                 singleLine = true,
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
@@ -170,12 +172,12 @@ fun TareaFormulario(
                     ) {
                         Icon(
                             imageVector = Icons.Filled.CleaningServices,
-                            contentDescription = "Limpiar",
+                            contentDescription = stringResource(R.string.limpiar),
                             modifier = Modifier.size(28.dp)
                         )
                         Spacer(modifier = Modifier.width(ButtonDefaults.IconSpacing))
                         Text(
-                            text = "Limpiar",
+                            text = stringResource(R.string.limpiar),
                             fontSize = 16.sp
                         )
                     }
@@ -192,12 +194,12 @@ fun TareaFormulario(
                     ) {
                         Icon(
                             imageVector = Icons.Default.Save,
-                            contentDescription = "Guardar",
+                            contentDescription = stringResource(R.string.guardar),
                             modifier = Modifier.size(28.dp)
                         )
                         Spacer(modifier = Modifier.width(ButtonDefaults.IconSpacing))
                         Text(
-                            text = "Guardar",
+                            text = stringResource(R.string.guardar),
                             fontSize = 16.sp
                         )
                     }
